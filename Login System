@@ -1,0 +1,36 @@
+import re
+
+def signIn():
+    user = input("Enter your username: ")
+    password = input("Enter your password: ")
+    if password == verifiedPassword:
+        loggedIn = True
+        print("You are logged in")
+
+def createAccount():
+    user = ("Create a username: ")
+    if len(user) < 1:
+        print("Username too short")
+    #elif user = #found user on data base, ie. already exists:
+        #print("Username taken")
+
+    password = ("Create a password: ")
+    if len(password) < 8 or len(password) > 12:
+        print("Your password must be 8-12 characters long")
+    validChar = "(?=.*[a-zA-Z](?=.*\d)(?=.*[!£$%&*@?])$"
+    pattern = re._compile(validChar)
+    match = re.search(pattern, password)
+    if match:
+        print("Password is valid.")
+    else:
+        print("Password invalid.")
+    
+loggedIn = False
+login = input("Do you have an account already? Y/N ")
+login = login.upper()
+if login == "Y":
+    signIn() #function
+elif login == "N":
+    createAccount() #function
+else:
+    print("You have not input a valid answer")
