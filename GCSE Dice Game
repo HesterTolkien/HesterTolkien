@@ -1,0 +1,182 @@
+import random
+import time
+#sets variables for each dice
+dice1 = [1,2,3,4,5,6]
+dice2 = [1,2,3,4,5,6]
+
+p1Score = 0
+p2Score = 0
+
+
+loggedIn = False
+while loggedIn == False:
+    welcome = input("Do you have an account? y/n")
+    welcome = welcome.lower()
+
+    if welcome == "n":
+        username = input("Enter a username:")
+        password = input("Enter a password:")
+        password1 = input("Confirm password:")
+        login = open("login.txt", "a")
+        login.write(username+":"+password+"\n")
+        login.close()
+
+        #if password input does not match the previous one, user must retry
+        while password != password1:
+            print("Passwords do NOT match!")
+            username = input("Enter a username:")
+            password = input("Enter a password:")
+            password1 = input("Confirm password:")
+            login = open("login.txt", "a")
+            login.write(username+":"+password+"\n")
+            login.close()
+        
+        login1 = input("Login:")
+        login2 = input("Password:")
+        login = open("login.txt", "r")
+        content = login.read()
+             
+        if (login1+":"+login2) in content:
+            print("Welcome")
+            loggedIn = True
+        else:
+            print("Incorrect Username or Password. Try again")
+
+        login.close()
+        
+                
+
+    elif welcome == "y":
+        login1 = input("Login:")
+        login2 = input("Password:")
+        login = open("login.txt", "r")
+        content = login.read()
+
+        #if combination of username and password not in file,
+        #user must try again or create an account
+        if (login1+":"+login2) in content:
+            print("Welcome")
+            loggedIn = True
+        else:
+            print("Incorrect Username or Password. Try again")
+                
+        login.close()       
+
+
+
+#inputs name for file write
+p1Name = input("Enter player one's name:")
+p2Name = input("Enter player two's name:")
+
+#repeats the code 5 times for the 5 rounds played
+for i in range(5):
+    p1d1 = random.choice(dice1)
+    p1d2 = random.choice(dice2)
+    p1 = p1d1 + p1d2
+    #outputs the players roll for that round
+    print(p1Name,"round", i+1,"\nRolled:",p1d1,"and",p1d2,"\nTotal:", p1)
+    #checks if the number is even or odd or a double
+    #so the appropriate points can be added
+    if p1d1 == p1d2:
+        print(p1Name,"rolled a double, roll again to determine score")
+        #if the roll is double, another dice is rolled and that is added to score
+        p1 = random.choice(dice1)
+        print("Rolled:", p1)
+        p1Score = p1Score + p1
+        print(p1Name,"score is now",p1Score,"\n")
+    elif p1 % 2 == 0:
+        p1Score = p1Score + 10
+        print(p1Name,"score is now",p1Score,"\n")
+    elif p1 % 2 == 1:
+        p1Score = p1Score - 5
+        #ensures that the score cannot go below zero
+        if p1Score < 0:
+            p1Score = 0
+        print(p1Name,"score is now",p1Score,"\n")
+        time.sleep(1)
+
+    p2d1 = random.choice(dice1)
+    p2d2 = random.choice(dice2)
+    p2 = p2d1 + p2d2
+    #outputs the players roll for that round
+    print(p2Name,"round", i+1,"\nRolled:",p2d1,"and",p2d2,"\nTotal:", p2)
+    #checks if the number is even or odd or a double
+    #so the appropriate points can be added
+    if p2d1 == p2d2:
+        print(p2Name,"rolled a double, roll again to determine score")
+        #if the roll is double, another dice is rolled and that is added to score
+        p2 = random.choice(dice1)
+        print("Rolled:", p2)
+        p2Score = p2Score + p2
+        print(p2Name,"score is now",p2Score,"\n")
+    elif p2 % 2 == 0:
+        p2Score = p2Score + 10
+        print(p2Name,"score is now",p2Score,"\n")
+    elif p2 % 2 == 1:
+        p2Score = p2Score - 5
+        if p2Score < 0:
+            p2Score = 0
+        print(p2Name,"score is now",p2Score,"\n")
+    #allows a pause between each output
+    time.sleep(1)
+
+#comparison between final scores, decided winner and if equal then rolls a decider
+
+if p1Score > p2Score:
+    print(p1Name,"won with", p1Score,"while",p2Name,"only had",p2Score)
+    winner = p1Name
+    winScore = p1Score
+elif p2Score > p1Score:
+    print(p2Name,"won with", p2Score,"while",p1Name,"only had",p1Score)
+    winner = p2Name
+    winScore = p2Score
+elif p1Score == p2Score:
+    #while loop until one wins
+    while p1Score == p2Score:
+        print("Your scores are equal, roll once more, highest roll wins")
+        p1 = random.choice(dice1)
+        p2 = random.choice(dice2)
+        if p1 > p2:
+            print(p1Name,"rolled highest so they win")
+            p1Score = p1Score + 1
+            winner = p1Name
+            winScore = p1Score
+        elif p2 > p1:
+            print(p2Name,"rolled highest so they win")
+            p2Score = p2Score + 1
+            winner = p2Name
+            winScore = p2Score
+
+
+#sets content to a temporary variable
+winners = open('winners.txt','r')
+winContent1 = winners.readline()
+winContent2 = winners.readline()
+winContent3 = winners.readline()
+winContent4 = winners.readline()
+
+winners.close()
+
+#sets variables to the latest winner's name and score
+lastWin = str(winScore)
+lastWinner = winner
+
+#rewrites file with latest winner and previous winners
+winners = open('winners.txt', 'w')
+winners.write(lastWin + " " + lastWinner + "\n")
+winners.write(winContent1)
+winners.write(winContent2)
+winners.write(winContent3)
+winners.write(winContent4)
+winners.close
+
+winners = open("winners.txt", "r")
+print(winners.read())
+winners.close()
+
+
+    
+
+    
+
+
