@@ -1,36 +1,60 @@
 import re
 
-def signIn():
+def signIn(): #will need to add read from file
     user = input("Enter your username: ")
     password = input("Enter your password: ")
     if password == verifiedPassword:
         loggedIn = True
         print("You are logged in")
 
-def createAccount():
-    user = ("Create a username: ")
+def createAccount(): #will need to add write to file
+    user = input("Create a username: ")
     if len(user) < 1:
         print("Username too short")
     #elif user = #found user on data base, ie. already exists:
         #print("Username taken")
+    validPass = False
+    while validPass == False: # needs to go somewhere else
+        password = input("""Create your password:
+Ensure:
+    -It is 8-12 characters in length
+    -It contains at least one uppercase letter
+    -It contains at least one number
+    -It contains at lest one symbol
+Enter password here: """)
+        #searches whether the inputted string contains any of these characters,
+        #therefore meaning it complies with requirements to make password
+        validChar = "^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,12}$"
+        pattern = re.compile(validChar)               
+        match = re.search(pattern, password)
+        
+        if match:
+            confirmPass = input("""Password is valid.
+Confirm your password: """)
+            while confirmPass != password:
+                print("Password incorrect, try again")
+                confirmPass = input("Confirm your password: ")
+            validPass = True
+            loggedIn = True # despite this
+            print("Welcome to ---")
+            
 
-    password = ("Create a password: ")
-    if len(password) < 8 or len(password) > 12:
-        print("Your password must be 8-12 characters long")
-    validChar = "(?=.*[a-zA-Z](?=.*\d)(?=.*[!£$%&*@?])$"
-    pattern = re._compile(validChar)
-    match = re.search(pattern, password)
-    if match:
-        print("Password is valid.")
-    else:
-        print("Password invalid.")
+        else: #while password = ??
+                print("Password invalid. Check you meet the requirements.")
+                password = input("Enter a password: ")
+                #password = True somewhere but where if
+        
+    #reference from https://www.geeksforgeeks.org/python/password-validation-in-python/
+    #https://docs.python.org/3/library/re.html#regular-expression-syntax
     
 loggedIn = False
-login = input("Do you have an account already? Y/N ")
-login = login.upper()
-if login == "Y":
-    signIn() #function
-elif login == "N":
-    createAccount() #function
-else:
-    print("You have not input a valid answer")
+while loggedIn == False:
+    login = input("Do you have an account already? Y/N ") #doesnt stop once logged in in create account
+    login = login.upper()
+    if login == "Y":
+        signIn() #function
+    elif login == "N":
+        createAccount() #function
+    else:
+        print("You have not input a valid answer")
+
