@@ -1,0 +1,86 @@
+account = input("Do you already have an account? Y/N ")
+#if user needs to create and account then asks for information
+loggedIn = False
+while loggedIn == False:
+    if account.upper() == "N":
+        print("Create a new account")
+        firstname = input("Enter your firstname: ")
+        lastname = input("Enter your lastname: ")
+        dob = input("Enter your date of birth: DD/MM/YYYY ")
+        login = open("bankLogin.txt", "a")
+        login.write(firstname + " " + lastname + " " + dob + "\n")
+        login.close()
+        account = input("Do you already have an account? Y/N ")
+        
+    elif account.upper() == "Y":
+        print("Sign in")
+        firstname = input("Enter your firstname: ")
+        lastname = input("Enter your lastname: ")
+        dob = input("Enter your date of birth: DD/MM/YYYY ")
+        login = open("bankLogin.txt", "r")
+        content = login.read()
+        if (firstname + " " + lastname + " " + dob + "\n") in content:
+            loggedIn = True
+            print("You're logged in")
+            login.close()
+        else:
+            print("Wrong details, try again")
+            account = input("Do you already have an account? Y/N ")
+        
+
+balance = float(input("What is your account balance? "))
+
+menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+
+while menu != "3":
+    if menu == "1":
+        withdraw = input("Would you like to withdraw? Y/N")
+        if withdraw.upper() == "Y":
+            withdrawAmount = float(input("How much would you like to withdraw?"))
+            #prevents more money being withdrawn than the person has
+            while withdrawAmount > balance:
+                print("You cant withdraw this much money")
+                withdrawAmount = float(input("How much would you like to withdraw? "))
+            #prints the new account balance of the user   
+            balance = balance - withdrawAmount
+            print("Your new balance is £",balance)
+            menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+        else:
+            menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+            
+    elif menu == "2":
+        deposit = input("Would you like to deposit? Y/N")
+        if deposit.upper() == "Y":
+            depositAmount = float(input("How much would you like to deposit?"))
+            balance = balance + depositAmount
+            print("Your new balance is £",balance)
+            menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+        else:
+            menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+
+    elif menu == "3":
+        print("Thank You")
+
+    else:
+        print("Invalid Input")
+        menu = input("What would you like to do?\n"
+             "1. Withdraw\n"
+             "2. Deposit\n"
+             "3. Exit\n")
+    
+
