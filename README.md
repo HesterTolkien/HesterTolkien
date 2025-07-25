@@ -1,4 +1,4 @@
-## Hi there 👋
+## A collection of various projects that I have worked on 
 
 <!--
 **HesterTolkien/HesterTolkien** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
