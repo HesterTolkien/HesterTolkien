@@ -1,0 +1,10 @@
+#random number generator for custom numbers
+import random
+
+nums = []
+start = int(input("Enter the lowest number: "))
+end = int(input("Enter the largest number: "))
+for i in range(start, end + 1):
+    nums.append(i)
+
+print("The random number generated is",random.choice(nums))
