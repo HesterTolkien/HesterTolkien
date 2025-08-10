@@ -1,5 +1,6 @@
 #random number generator for custom numbers
 import random
+import tkinter as tk
 
 nums = []
 start = int(input("Enter the lowest number: "))
@@ -8,3 +9,28 @@ for i in range(start, end + 1):
     nums.append(i)
 
 print("The random number generated is",random.choice(nums))
+
+))
+
+window = tk.Tk()
+window.title("Random Number Generator")
+window.geometry("500x300")
+
+def getStart():
+    start = start.get("1.0", "end")
+    print(start)
+
+def getEnd():
+    end = end.get("1.0", "end")
+    print(end)
+    
+start = tk.Text(window, height = 2, width = 10, text = "Lowest")
+start.pack()
+submitEnd = Button(window, height = 1, width = 5, text = "Submit", command = lambda: getStart())
+
+end = tk.Text(window, height = 2, width = 10, text= "Highest")
+end.pack()
+submitEnd = Button(window, height = 1, width = 5, text = "Submit", command = lambda: getEnd())
+
+window.mainloop()
+
