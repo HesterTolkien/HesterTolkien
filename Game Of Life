@@ -1,0 +1,20 @@
+import random
+
+width = int(input("Width: "))
+height = int(input("Height: "))
+
+def deadState(width, height):
+    boardState = [[0] * width] * height
+    print(boardState)
+
+def randomState(width, height):
+    alive = random.random()
+    if alive > 0.5:
+        cellState = 0
+    else:
+        cellState = 1
+    boardState = [[cellState] * width] * height
+    print(boardState)       
+    
+deadState(width, height)
+randomState(width, height)
