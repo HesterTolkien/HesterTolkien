@@ -1,20 +1,38 @@
 import random
 
+#customise the size of the board
 width = int(input("Width: "))
 height = int(input("Height: "))
 
+alive  = "#"
+dead = " "
+
 def deadState(width, height):
     boardState = [[0] * width] * height
-    print(boardState)
+    #return so global variable
+    return boardState
 
+#ignore for now and just start with a set grid to come back to later
+#still no
 def randomState(width, height):
-    alive = random.random()
-    if alive > 0.5:
-        cellState = 0
-    else:
-        cellState = 1
-    boardState = [[cellState] * width] * height
-    print(boardState)       
+    for row in boardState:
+        for column in row:
+            alive = random.random()
+            if alive > 0.5:
+                cellState = 0
+            else:
+                cellState = 1
+            boardState[row][column] = cellState
+    print(boardState)
+    return boardState
     
-deadState(width, height)
-randomState(width, height)
+            
+def render():
+    for i in boardState:
+        #print just the # instead of '#', ...
+        print(*i)
+    
+
+boardState = deadState(width, height)
+render()
+#boardState = randomState(width, height)
