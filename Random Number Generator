@@ -1,36 +1,45 @@
-#random number generator for custom numbers
+#random number generator
 import random
 import tkinter as tk
+from tkinter import *
 
-nums = []
-start = int(input("Enter the lowest number: "))
-end = int(input("Enter the largest number: "))
-for i in range(start, end + 1):
-    nums.append(i)
+#nums = []
+#start = int(input("Enter the lowest number: "))
+#end = int(input("Enter the largest number: "))
+##creates a list of possible numbers within the range to choose from
+#for i in range(start, end + 1):
+#    nums.append(i)
 
-print("The random number generated is",random.choice(nums))
-
-))
+#print("The random number generated is",random.choice(nums))
 
 window = tk.Tk()
 window.title("Random Number Generator")
 window.geometry("500x300")
 
 def getStart():
-    start = start.get("1.0", "end")
-    print(start)
+    startNum = start.get()
+    print(startNum)
 
 def getEnd():
-    end = end.get("1.0", "end")
-    print(end)
-    
-start = tk.Text(window, height = 2, width = 10, text = "Lowest")
-start.pack()
-submitEnd = Button(window, height = 1, width = 5, text = "Submit", command = lambda: getStart())
+    endNum = end.get()
+    print(endNum)
 
-end = tk.Text(window, height = 2, width = 10, text= "Highest")
+#creates an entry box with a label
+#to input the starting number
+startLabel = tk.Label(window, text="Enter the lowest number: ")
+startLabel.pack()
+start = tk.Entry(window)
+start.pack()
+submitStart = tk.Button(window, height = 1, width = 5, text = "Submit", command = lambda: getStart())
+submitStart.pack()
+
+#and to input the ending number
+#to pass into the function ---
+endLabel = tk.Label(window, text="Enter the highest number: ")
+endLabel.pack()
+end = tk.Entry(window)
 end.pack()
-submitEnd = Button(window, height = 1, width = 5, text = "Submit", command = lambda: getEnd())
+submitEnd = tk.Button(window, height = 1, width = 5, text = "Submit", command = lambda: getEnd())
+submitEnd.pack()
 
 window.mainloop()
-
