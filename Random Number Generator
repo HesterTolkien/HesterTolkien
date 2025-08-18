@@ -3,15 +3,6 @@ import random
 import tkinter as tk
 from tkinter import *
 
-#nums = []
-#start = int(input("Enter the lowest number: "))
-#end = int(input("Enter the largest number: "))
-##creates a list of possible numbers within the range to choose from
-#for i in range(start, end + 1):
-#    nums.append(i)
-
-#print("The random number generated is",random.choice(nums))
-
 window = tk.Tk()
 window.title("Random Number Generator")
 window.geometry("500x300")
@@ -19,10 +10,21 @@ window.geometry("500x300")
 def getStart():
     startNum = start.get()
     print(startNum)
+    return startNum
 
 def getEnd():
     endNum = end.get()
     print(endNum)
+    return endNum
+
+def randomNum(startNum, endNum):
+    startNum = int(startNum)
+    endNum = int(endNum)
+    #creates a list of possible numbers within the range to choose from
+    nums = []
+    for i in range(startNum, endNum):
+        nums.append(i)
+    print("The random number generated is",random.choice(nums))
 
 #creates an entry box with a label
 #to input the starting number
@@ -30,16 +32,23 @@ startLabel = tk.Label(window, text="Enter the lowest number: ")
 startLabel.pack()
 start = tk.Entry(window)
 start.pack()
-submitStart = tk.Button(window, height = 1, width = 5, text = "Submit", command = lambda: getStart())
+submitStart = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getStart())
 submitStart.pack()
 
 #and to input the ending number
-#to pass into the function ---
+#to pass into the function 'randomNum'
 endLabel = tk.Label(window, text="Enter the highest number: ")
 endLabel.pack()
 end = tk.Entry(window)
 end.pack()
-submitEnd = tk.Button(window, height = 1, width = 5, text = "Submit", command = lambda: getEnd())
+submitEnd = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getEnd())
 submitEnd.pack()
+
+#button to call the 'randomNum' function to generate the random number
+generate = tk.Button(window, height = 1, width = 21, text = "Generate Random Number", command = lambda: randomNum(startNum, endNum))
+generate.pack()
+
+startNum = getStart()
+endNum = getEnd()
 
 window.mainloop()
