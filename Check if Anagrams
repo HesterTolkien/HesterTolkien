@@ -1,0 +1,20 @@
+str1 = input("Enter the first string: ")
+str2 = input("Enter the second string: ")
+
+
+str1.replace(" ", "")
+str2.replace(" ", "")
+
+str1 = str1.upper()
+str2 = str2.upper()
+
+str1List = list(str1)
+str2List = list(str2)
+
+str1List = sorted(str1List)
+str2List = sorted(str2List)
+
+if str1List == str2List:
+    print("Anagrams")
+else:
+    print("Not anagrams")
