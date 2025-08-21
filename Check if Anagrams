@@ -1,19 +1,25 @@
+#ask the user for two strings to compare
 str1 = input("Enter the first string: ")
 str2 = input("Enter the second string: ")
 
-
+#remove any spaces because that doesn't affect it being an anagram
 str1.replace(" ", "")
 str2.replace(" ", "")
 
+#make them the same case so that doesn't affect it being an anagram
 str1 = str1.upper()
 str2 = str2.upper()
 
+#make the two strings a list so each letter is a separate entity
 str1List = list(str1)
 str2List = list(str2)
 
+#sort the two lists so the indexes can be compared to each other
 str1List = sorted(str1List)
 str2List = sorted(str2List)
 
+#if the sorted lists equal each other then the strings are anagrams
+#if they don't, then the two aren't
 if str1List == str2List:
     print("Anagrams")
 else:
