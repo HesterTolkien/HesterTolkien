@@ -3,9 +3,16 @@ import re
 def signIn(): #will need to add read from file
     user = input("Enter your username: ")
     password = input("Enter your password: ")
-    if password == verifiedPassword:
+    #checks the users input values against the ones stored in the file
+    #if they match it logs them in 
+    loginCheck = open("loginStore.txt", "r")
+    inStore = loginCheck.read()
+    if user+":"+password in inStore:
         loggedIn = True
         print("You are logged in")
+    else:
+        print("""Unable to log in.
+Please check your credentials and try again""")
 
 def createAccount(): #will need to add write to file
     user = input("Create a username: ")
@@ -58,7 +65,14 @@ Confirm your password: """)
                 validPass = True
                 loggedIn = True # despite this
                 print("Welcome to ---")
-                
+                #gets stuck here, needs to loop back somehow
+                #password = True somewhere but where if
+
+    #writes users information to file so it can be checked against
+    #to log back in again in future
+    store = open("loginStore.txt", "a")
+    store.write(user+":"+password+"\n")
+    store.close()
         
     #reference from https://www.geeksforgeeks.org/python/password-validation-in-python/
     #https://docs.python.org/3/library/re.html#regular-expression-syntax
@@ -73,4 +87,6 @@ while loggedIn == False:
         createAccount() #function
     else:
         print("You have not input a valid answer")
+
+    
 
