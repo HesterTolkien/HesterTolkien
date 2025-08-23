@@ -19,8 +19,14 @@ def createAccount(): #will need to add write to file
     while len(user) < 1:
         print("Username too short. Try again.")
         user = input("Create a username: ")
-    #elif user = #found user on data base, ie. already exists:
-        #print("Username taken. If this is you, try logging in. If this is not, try another username")
+    userTaken = open("loginStore.txt", "r")
+    taken = userTaken.read()
+    if user in taken:
+        #checks if the username already exists within the database
+        #to prevent repeated usernames
+        print("""Username taken.
+If this is you, try logging in.
+If this is not, try another username""")
     validPass = False
      # needs to go somewhere else
     password = input("""Create your password:
