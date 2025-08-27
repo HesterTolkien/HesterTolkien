@@ -9,22 +9,22 @@ window.geometry("500x300")
 
 def getStart():
     startNum = start.get()
+    startNum = int(startNum)
     print(startNum)
     return startNum
 
 def getEnd():
     endNum = end.get()
+    endNum = int(endNum)
     print(endNum)
     return endNum
 
 def randomNum(startNum, endNum):
-    startNum = int(startNum)
-    endNum = int(endNum)
-    #creates a list of possible numbers within the range to choose from
-    nums = []
-    for i in range(startNum, endNum):
-        nums.append(i)
-    print("The random number generated is",random.choice(nums))
+    start = startNum
+    end = endNum
+    #makes a random selection within the range given
+    num = random.randint(start, end)
+    print("The random number generated is", num)
 
 #creates an entry box with a label
 #to input the starting number
