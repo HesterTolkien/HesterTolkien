@@ -7,24 +7,30 @@ window = tk.Tk()
 window.title("Random Number Generator")
 window.geometry("500x300")
 
+#define the variables, making them global and accessible from the beginning
+startNum = None
+endNum = None
+
 def getStart():
+    global startNum
     startNum = start.get()
     startNum = int(startNum)
     print(startNum)
     return startNum
 
 def getEnd():
+    global endNum
     endNum = end.get()
     endNum = int(endNum)
     print(endNum)
     return endNum
 
 def randomNum(startNum, endNum):
-    start = startNum
-    end = endNum
-    #makes a random selection within the range given
-    num = random.randint(start, end)
-    print("The random number generated is", num)
+    #ensures it is using the input values not the initial global values
+    if startNum is not None and endNum is not None:
+        num = random.randint(startNum, endNum)
+        #makes a random selection within the range given
+        print("The random number generated is", num)
 
 #creates an entry box with a label
 #to input the starting number
@@ -47,8 +53,5 @@ submitEnd.pack()
 #button to call the 'randomNum' function to generate the random number
 generate = tk.Button(window, height = 1, width = 21, text = "Generate Random Number", command = lambda: randomNum(startNum, endNum))
 generate.pack()
-
-startNum = getStart()
-endNum = getEnd()
 
 window.mainloop()
