@@ -15,14 +15,12 @@ def getStart():
     global startNum
     startNum = start.get()
     startNum = int(startNum)
-    print(startNum)
     return startNum
 
 def getEnd():
     global endNum
     endNum = end.get()
     endNum = int(endNum)
-    print(endNum)
     return endNum
 
 def randomNum(startNum, endNum):
@@ -30,7 +28,11 @@ def randomNum(startNum, endNum):
     if startNum is not None and endNum is not None:
         num = random.randint(startNum, endNum)
         #makes a random selection within the range given
-        print("The random number generated is", num)
+        outputLabel = tk.Label(window, text="The random number generated is: ")
+        outputLabel.pack(pady = 10)
+        output = tk.Text(window, height = 1, width = 10)
+        output.insert(tk.END, num)
+        output.pack(pady = 5)
 
 #creates an entry box with a label
 #to input the starting number
@@ -39,7 +41,7 @@ startLabel.pack()
 start = tk.Entry(window)
 start.pack()
 submitStart = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getStart())
-submitStart.pack()
+submitStart.pack(pady = 5)
 
 #and to input the ending number
 #to pass into the function 'randomNum'
@@ -48,10 +50,10 @@ endLabel.pack()
 end = tk.Entry(window)
 end.pack()
 submitEnd = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getEnd())
-submitEnd.pack()
+submitEnd.pack(pady = 5)
 
 #button to call the 'randomNum' function to generate the random number
 generate = tk.Button(window, height = 1, width = 21, text = "Generate Random Number", command = lambda: randomNum(startNum, endNum))
-generate.pack()
+generate.pack(pady = 5)
 
 window.mainloop()
