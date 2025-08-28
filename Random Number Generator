@@ -6,6 +6,7 @@ from tkinter import *
 window = tk.Tk()
 window.title("Random Number Generator")
 window.geometry("500x300")
+window.configure(bg="LightSeaGreen")
 
 #define the variables, making them global and accessible from the beginning
 startNum = None
@@ -28,7 +29,9 @@ def randomNum(startNum, endNum):
     if startNum is not None and endNum is not None:
         num = random.randint(startNum, endNum)
         #makes a random selection within the range given
-        outputLabel = tk.Label(window, text="The random number generated is: ")
+        outputLabel = tk.Label(window, text="The random number generated is: ",
+                               bg="DarkCyan", fg="white",
+                               borderwidth=1, relief="raised")
         outputLabel.pack(pady = 10)
         output = tk.Text(window, height = 1, width = 10)
         output.insert(tk.END, num)
@@ -36,24 +39,38 @@ def randomNum(startNum, endNum):
 
 #creates an entry box with a label
 #to input the starting number
-startLabel = tk.Label(window, text="Enter the lowest number: ")
-startLabel.pack()
+startLabel = tk.Label(window, text="Enter the lowest number: ",
+                      bg="DarkCyan", fg="white",
+                      borderwidth=1, relief="raised")
+startLabel.pack(pady = 2)
 start = tk.Entry(window)
 start.pack()
-submitStart = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getStart())
+submitStart = tk.Button(window, height = 1, width = 6,
+                        text = "Submit", bg="#099696", fg="white",
+                        activebackground="Teal", activeforeground="white",
+                        command = lambda: getStart())
 submitStart.pack(pady = 5)
 
 #and to input the ending number
 #to pass into the function 'randomNum'
-endLabel = tk.Label(window, text="Enter the highest number: ")
-endLabel.pack()
+endLabel = tk.Label(window, text="Enter the highest number: ",
+                    bg="DarkCyan", fg="white",
+                    borderwidth=1, relief="raised")
+endLabel.pack(pady = 2)
 end = tk.Entry(window)
 end.pack()
-submitEnd = tk.Button(window, height = 1, width = 6, text = "Submit", command = lambda: getEnd())
+submitEnd = tk.Button(window, height = 1, width = 6,
+                      text = "Submit", bg="#099696", fg="white",
+                      activebackground="Teal", activeforeground="white",
+                      command = lambda: getEnd())
 submitEnd.pack(pady = 5)
 
 #button to call the 'randomNum' function to generate the random number
-generate = tk.Button(window, height = 1, width = 21, text = "Generate Random Number", command = lambda: randomNum(startNum, endNum))
+generate = tk.Button(window, height = 1, width = 21, 
+                     text = "Generate Random Number", bg="#099696", fg="white",
+                     activebackground="Teal", activeforeground="white",
+                     command = lambda: randomNum(startNum, endNum))
 generate.pack(pady = 5)
 
 window.mainloop()
+
