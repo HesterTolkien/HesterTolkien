@@ -31,14 +31,22 @@ pygame.init()
 screen = pygame.display.set_mode((500, 700))
 pygame.display.set_caption("Bouncing Ball Game")
 
-#where the platform spawns in
-x = 210
-y = 600
-#sets the size of the platform block
-width = 80
-height = 20
-#the speed of the movement of the platform
-vel = 7.5
+# Clock to control frame rate
+clock = pygame.time.Clock()
+
+#platform constants:
+px = 210
+py = 600
+pWidth = 80
+pHeight = 20
+pVel = 7.5
+
+#ball constants:
+bx = 250
+by = 350
+bRad = 15
+bVelx = 4
+bVely = 4
 
 run = True
 while run:
@@ -53,17 +61,31 @@ while run:
     
     #makes a boundary so platform can't go off screen
     #and makes left and right arrow keys control platform
-    if keys[pygame.K_LEFT] and x > vel:
-        x -= vel
+    if keys[pygame.K_LEFT] and px > vel:
+        px -= vel
         
-    if keys[pygame.K_RIGHT] and x < 500 - vel - width:
-        x += vel
-
+    if keys[pygame.K_RIGHT] and px < 500 - vel - pWidth:
+        px += vel
 
     screen.fill((0,0,0))
     #draws the rectangle of the platform
-    pygame.draw.rect(screen, (255,0,0), (x, y, width, height))
+    pygame.draw.rect(screen, (255,0,0), (px, py, pWidth, pHeight))
     pygame.display.update()
 
+    #to move ball
+    bx += bVelx
+    by += bVely
+
+    #draws ball
+    pygame.draw.circle(screen, (0,255,0), (bx, by), bRad)
+    pygame.display.update()
+
+    #bounce off edges
+    if bx - bRad <= 0 or bx + bRad >= 500:
+        bVelx = -bVelx  
+    if by - bRad <= 0 or by + bRad >= 700:
+        bVely = -bVely 
+
 pygame.quit()
+
 
