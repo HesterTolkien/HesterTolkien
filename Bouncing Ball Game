@@ -85,6 +85,9 @@ while run:
         bVelx = -bVelx  
     if by - bRad <= 0 or by + bRad >= 700:
         bVely = -bVely 
+    if (px - bRad <= bx <= px + bRad + pWidth
+        and py - bRad <= by <= py + bRad + pHeight):
+        bVely = -bVely
 
 pygame.quit()
 
