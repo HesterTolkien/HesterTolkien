@@ -33,6 +33,7 @@ pygame.display.set_caption("Bouncing Ball Game")
 
 # Clock to control frame rate
 clock = pygame.time.Clock()
+clock.tick(60)
 
 #platform constants:
 px = 210
@@ -45,8 +46,12 @@ pVel = 7.5
 bx = 250
 by = 350
 bRad = 15
-bVelx = 4
-bVely = 4
+bVelx = 5
+bVely = 5
+
+score = 0
+font = pygame.font.Font("freesansbold.ttf", 20)
+scoreText = font.render("Score: {0}".format(score) ,True,(255,255,255))
 
 run = True
 while run:
@@ -61,13 +66,14 @@ while run:
     
     #makes a boundary so platform can't go off screen
     #and makes left and right arrow keys control platform
-    if keys[pygame.K_LEFT] and px > vel:
-        px -= vel
+    if keys[pygame.K_LEFT] and px > pVel:
+        px -= pVel
         
-    if keys[pygame.K_RIGHT] and px < 500 - vel - pWidth:
-        px += vel
+    if keys[pygame.K_RIGHT] and px < 500 - pVel - pWidth:
+        px += pVel
 
     screen.fill((0,0,0))
+    
     #draws the rectangle of the platform
     pygame.draw.rect(screen, (255,0,0), (px, py, pWidth, pHeight))
     pygame.display.update()
@@ -80,15 +86,23 @@ while run:
     pygame.draw.circle(screen, (0,255,0), (bx, by), bRad)
     pygame.display.update()
 
-    #bounce off edges
+    #bounce off edges and platform
     if bx - bRad <= 0 or bx + bRad >= 500:
         bVelx = -bVelx  
     if by - bRad <= 0 or by + bRad >= 700:
-        bVely = -bVely 
+        bVely = -bVely
     if (px - bRad <= bx <= px + bRad + pWidth
         and py - bRad <= by <= py + bRad + pHeight):
         bVely = -bVely
+        score += 1
 
+    #displays score
+    screen.blit(scoreText, (50, 50))
+    pygame.display.flip()
+    pygame.display.update()
+
+        
 pygame.quit()
+
 
 
