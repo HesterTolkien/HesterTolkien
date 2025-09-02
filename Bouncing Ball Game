@@ -37,6 +37,7 @@ clock.tick(60)
 
 #platform constants:
 px = 210
+
 py = 600
 pWidth = 80
 pHeight = 20
@@ -50,8 +51,7 @@ bVelx = 5
 bVely = 5
 
 score = 0
-font = pygame.font.Font("freesansbold.ttf", 20)
-scoreText = font.render("Score: {0}".format(score) ,True,(255,255,255))
+
 
 run = True
 while run:
@@ -95,12 +95,27 @@ while run:
         and py - bRad <= by <= py + bRad + pHeight):
         bVely = -bVely
         score += 1
-
+        #increases speed every time the ball hits the platform
+        if bVely > 0:
+            bVelx += 1
+            bVely += 1
+        else:
+            bVelx -= 1
+            bVely -= 1
+            
+    #ends run if the ball hits the bottom border   
+    if by + bRad == 700:
+        run = False
+        
     #displays score
+    font = pygame.font.Font("freesansbold.ttf", 20)
+    scoreText = font.render("Score: {0}".format(score) ,True,(255,255,255))
     screen.blit(scoreText, (50, 50))
     pygame.display.flip()
     pygame.display.update()
 
+        
+pygame.quit()
         
 pygame.quit()
 
