@@ -26,6 +26,7 @@
 
 import pygame
 import sys
+import time
 
 pygame.init()
 screen = pygame.display.set_mode((500, 700))
@@ -104,7 +105,12 @@ while run:
             bVely -= 1
             
     #ends run if the ball hits the bottom border   
-    if by + bRad == 700:
+    if by + bRad >= 700:
+        gameOver = font.render("Game Over", True, (255,255,255))
+        screen.blit(gameOver, (200, 350))
+        pygame.display.flip()
+        pygame.display.update()
+        time.sleep(5)
         run = False
         
     #displays score
@@ -116,6 +122,7 @@ while run:
 
         
 pygame.quit()
+
         
 pygame.quit()
 
