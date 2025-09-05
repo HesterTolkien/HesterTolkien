@@ -87,6 +87,16 @@ while run:
     pygame.draw.circle(screen, (0,255,0), (bx, by), bRad)
     pygame.display.update()
 
+    #draw obstacles
+    for i in range(100, 500, 100):
+        pygame.draw.rect(screen, (255,0,0), (i, 100, 20, 20))
+        pygame.display.update()
+    #fix
+    if bx - bRad <= i or bx + bRad >= i + 20:
+        bVelx = -bVelx
+    if by - bRad <= 100 or by + bRad >= 120:
+        bVely = -bVely
+
     #bounce off edges and platform
     if bx - bRad <= 0 or bx + bRad >= 500:
         bVelx = -bVelx  
