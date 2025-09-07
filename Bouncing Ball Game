@@ -92,8 +92,8 @@ while run:
         pygame.draw.rect(screen, (255,0,0), (x, y, 20, 20))
         pygame.display.update()
 
-        if (x - bRad <= bx <= x + bRad + 20
-            and y - bRad <= by <= y + bRad + 20):
+      if (bx - bRad <= x <= bx + bRad + 20
+            and by - bRad <= y <= by + bRad + 20):
             bVely = -bVely
             
     #creates 5 obstacles
