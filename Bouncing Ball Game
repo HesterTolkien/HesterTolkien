@@ -96,12 +96,14 @@ while run:
             and by - bRad <= y <= by + bRad + 20):
             bVely = -bVely
             
+        return bVely
+        
     #creates 5 obstacles
-    obstacles(100, 100, bVely)
-    obstacles(170, 100, bVely)
-    obstacles(240, 100, bVely)
-    obstacles(310, 100, bVely)
-    obstacles(380, 100, bVely)
+    bVely = obstacles(100, 100, bVely)
+    bVely = obstacles(170, 100, bVely)
+    bVely = obstacles(240, 100, bVely)
+    bVely = obstacles(310, 100, bVely)
+    bVely = obstacles(380, 100, bVely)
 
     #bounce off edges and platform
     if bx - bRad <= 0 or bx + bRad >= 500:
