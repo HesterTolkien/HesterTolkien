@@ -27,6 +27,7 @@
 import pygame
 import sys
 import time
+import random
 
 pygame.init()
 screen = pygame.display.set_mode((500, 700))
@@ -38,21 +39,21 @@ clock.tick(60)
 
 #platform constants:
 px = 210
-
 py = 600
 pWidth = 80
 pHeight = 20
 pVel = 7.5
 
 #ball constants:
-bx = 250
+#adds some randomness to the beginning
+#since previously it was repetative and predictable 
+bx = random.randrange(100, 400)
 by = 350
 bRad = 15
 bVelx = 5
 bVely = 5
 
 score = 0
-
 
 run = True
 while run:
@@ -92,11 +93,12 @@ while run:
         pygame.draw.rect(screen, (255,0,0), (x, y, 20, 20))
         pygame.display.update()
 
-      if (x - bRad <= bx <= x + bRad + 20
+        if (x - bRad <= bx <= x + bRad + 20
             and y - bRad <= by <= y + bRad + 20):
             bVely = -bVely
             
         return bVely
+       
         
     #creates 5 obstacles
     bVely = obstacles(100, 100, bVely)
@@ -141,8 +143,6 @@ while run:
         
 pygame.quit()
 
-        
-pygame.quit()
 
 
 
