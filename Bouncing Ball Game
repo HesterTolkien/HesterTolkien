@@ -128,6 +128,8 @@ while run:
     if by + bRad >= 700:
         gameOver = font.render("Game Over", True, (255,255,255))
         screen.blit(gameOver, (200, 350))
+        finalScore = font.render("Your Score Was {0}".format(score), True, (255, 255, 255))
+        screen.blit(finalScore, (175, 400))
         pygame.display.flip()
         pygame.display.update()
         time.sleep(5)
