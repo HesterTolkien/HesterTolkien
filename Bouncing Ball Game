@@ -136,9 +136,21 @@ while run:
                 screen.blit(gameOver, (200, 350))
                 finalScore = font.render("Your Score Was {0}".format(score), True, (255, 255, 255))
                 screen.blit(finalScore, (175, 400))
+                #determines whether current score is the high score
+                scoring = open("scoring.txt", "r")
+                highscore = scoring.read()
+                scoring.close()
+                if highscore < str(score):
+                    highscore = score
+                    scoring = open("scoring.txt", "w")
+                    scoring.write(str(score))
+                scoring.close()
+                highScore = font.render("The High Score is: {0}".format(highscore), True, (255, 255, 255))
+                screen.blit(highScore, (165, 450))
                 pygame.display.flip()
                 pygame.display.update()
                 time.sleep(5)
+                
                 run = False
             
         #displays score
@@ -155,5 +167,4 @@ while run:
         pygame.display.flip()
         pygame.display.update()
 
-        
 pygame.quit()
