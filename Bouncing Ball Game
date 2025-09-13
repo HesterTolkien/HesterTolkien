@@ -55,9 +55,20 @@ bVely = 5
 
 score = 0
 lives = 3
-        
-run = True
-  
+
+run = ""
+#press space to start the game
+start = pygame.font.Font("freesansbold.ttf", 30)
+startText = start.render("Press Space to Start" ,True,(255,255,255))
+screen.blit(startText, (50, 50))
+pygame.display.flip()
+pygame.display.update()
+
+pressStart = pygame.key.get_pressed()
+if pressStart[pygame.K_SPACE]:
+    print("Hi")
+    run = True  
+
 while run:
     while lives != 0: 
         pygame.time.delay(50)
@@ -162,8 +173,8 @@ while run:
 
         #displayes lives
         life = pygame.font.Font("freesansbold.ttf", 20)
-        scoreText = font.render("Lives: {0}".format(lives) ,True,(255,255,255))
-        screen.blit(scoreText, (375, 50))
+        lifeText = life.render("Lives: {0}".format(lives) ,True,(255,255,255))
+        screen.blit(lifeText, (375, 50))
         pygame.display.flip()
         pygame.display.update()
 
