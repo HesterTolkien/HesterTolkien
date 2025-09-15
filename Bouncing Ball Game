@@ -60,15 +60,17 @@ gameStart = False
 
 #press space to start the game
 start = pygame.font.Font("freesansbold.ttf", 30)
-startText = start.render("Press Space to Start" ,True,(255,255,255))
-screen.blit(startText, (50, 50))
+startText = start.render("Press 'Space' to Start" ,True,(255,255,255))
+screen.blit(startText, (95, 300))
 pygame.display.flip()
 pygame.display.update()
 
 #space key needs to be pressed in order for the game to start
 while not gameStart:
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 run = True
                 gameStart = True
@@ -79,7 +81,7 @@ while run:
         for event in pygame.event.get():
             #checks if window closed to allow it to close when cross clicked
             if event.type == pygame.QUIT: 
-                run = False
+                pygame.quit()
                 
         #check if a key is pressed
         keys = pygame.key.get_pressed()
@@ -155,13 +157,17 @@ while run:
                 scoring = open("scoring.txt", "r")
                 highscore = scoring.read()
                 scoring.close()
-                if highscore < str(score):
+                if int(highscore) < score:
                     highscore = score
                     scoring = open("scoring.txt", "w")
-                    scoring.write(str(score))
-                scoring.close()
-                highScore = font.render("The High Score is: {0}".format(highscore), True, (255, 255, 255))
-                screen.blit(highScore, (165, 450))
+                    scoring.write(str(highscore))
+                    scoring.close()
+                    newHighScore = font.render("You got a new high score!", True, (255, 255, 255))
+                    screen.blit((newHighScore), (130, 450))
+                    pygame.display.flip()
+                    pygame.display.update()
+                highScore = font.render("The High Score is: {0}".format(score), True, (255, 255, 255))
+                screen.blit(highScore, (160, 500))
                 pygame.display.flip()
                 pygame.display.update()
                 time.sleep(5)
@@ -184,3 +190,4 @@ while run:
 
 
 pygame.quit()
+
