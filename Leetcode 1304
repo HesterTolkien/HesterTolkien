@@ -1,0 +1,22 @@
+## Find N Unique Integers Sum up to Zero
+
+def sumZero(n):
+        nList = []
+        if n == 1:
+            nList.append(0)
+        elif n % 2 == 1:
+            nList.append(0)
+            for i in range(1, n//2 + 1):
+                nList.append(i)
+                nList.append(-i)
+        else:
+            for i in range(1, n//2 + 1):
+                nList.append(i)
+                nList.append(-i)
+        return nList
+
+
+n = int(input("How many integers in array: "))
+nList = sumZero(n)
+print("The numbers in this array add to equal zero")
+print(nList)
