@@ -37,156 +37,163 @@ pygame.display.set_caption("Bouncing Ball Game")
 clock = pygame.time.Clock()
 clock.tick(60)
 
-#platform constants:
-px = 210
-py = 600
-pWidth = 80
-pHeight = 20
-pVel = 7.5
+# Repeats the game after each round ends
+while 1 == 1:
 
-#ball constants:
-#adds some randomness to the beginning
-#since previously it was repetative and predictable 
-bx = random.randrange(100, 400)
-by = 350
-bRad = 15
-bVelx = 5
-bVely = 5
+    #platform constants:
+    px = 210
+    py = 600
+    pWidth = 80
+    pHeight = 20
+    pVel = 7.5
 
-score = 0
-lives = 3
+    #ball constants:
+    #adds some randomness to the beginning
+    #since previously it was repetative and predictable 
+    bx = random.randrange(100, 400)
+    by = 350
+    bRad = 15
+    bVelx = 5
+    bVely = 5
 
-gameStart = False
+    score = 0
+    lives = 3
 
-#press space to start the game
-start = pygame.font.Font("freesansbold.ttf", 30)
-startText = start.render("Press 'Space' to Start" ,True,(255,255,255))
-screen.blit(startText, (95, 300))
-pygame.display.flip()
-pygame.display.update()
+    gameStart = False
 
-#space key needs to be pressed in order for the game to start
-while not gameStart:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                run = True
-                gameStart = True
-        
-while run:
-    while lives != 0: 
-        pygame.time.delay(50)
+    #press space to start the game
+    start = pygame.font.Font("freesansbold.ttf", 30)
+    startText = start.render("Press 'Space' to Start" ,True,(255,255,255))
+    screen.blit(startText, (95, 300))
+    pygame.display.flip()
+    pygame.display.update()
+
+    #space key needs to be pressed in order for the game to start
+    while not gameStart:
         for event in pygame.event.get():
-            #checks if window closed to allow it to close when cross clicked
-            if event.type == pygame.QUIT: 
+            if event.type == pygame.QUIT:
                 pygame.quit()
-                
-        #check if a key is pressed
-        keys = pygame.key.get_pressed()
-        
-        #makes a boundary so platform can't go off screen
-        #and makes left and right arrow keys control platform
-        if keys[pygame.K_LEFT] and px > pVel:
-            px -= pVel
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    run = True
+                    gameStart = True
             
-        if keys[pygame.K_RIGHT] and px < 500 - pVel - pWidth:
-            px += pVel
+    while run:
+        while lives != 0: 
+            pygame.time.delay(50)
+            for event in pygame.event.get():
+                #checks if window closed to allow it to close when cross clicked
+                if event.type == pygame.QUIT: 
+                    pygame.quit()
+                    
+            #check if a key is pressed
+            keys = pygame.key.get_pressed()
+            
+            #makes a boundary so platform can't go off screen
+            #and makes left and right arrow keys control platform
+            if keys[pygame.K_LEFT] and px > pVel:
+                px -= pVel
+                
+            if keys[pygame.K_RIGHT] and px < 500 - pVel - pWidth:
+                px += pVel
 
-        screen.fill((0,0,0))
-        
-        #draws the rectangle of the platform
-        pygame.draw.rect(screen, (255,0,0), (px, py, pWidth, pHeight))
-        pygame.display.update()
-
-        #to move ball
-        bx += bVelx
-        by += bVely
-
-        #draws ball
-        pygame.draw.circle(screen, (0,255,0), (bx, by), bRad)
-        pygame.display.update()
-
-        #draw obstacles
-        def obstacles(x, y, bVely):
-            pygame.draw.rect(screen, (255,0,0), (x, y, 20, 20))
+            screen.fill((0,0,0))
+            
+            #draws the rectangle of the platform
+            pygame.draw.rect(screen, (255,0,0), (px, py, pWidth, pHeight))
             pygame.display.update()
 
-            if (x - bRad <= bx <= x + bRad + 20
-                and y - bRad <= by <= y + bRad + 20):
-                bVely = -bVely
-                
-            return bVely
-           
-            
-        #creates 5 obstacles
-        bVely = obstacles(100, 100, bVely)
-        bVely = obstacles(170, 100, bVely)
-        bVely = obstacles(240, 100, bVely)
-        bVely = obstacles(310, 100, bVely)
-        bVely = obstacles(380, 100, bVely)
+            #to move ball
+            bx += bVelx
+            by += bVely
 
-        #bounce off edges and platform
-        if bx - bRad <= 0 or bx + bRad >= 500:
-            bVelx = -bVelx  
-        if by - bRad <= 0 or by + bRad >= 700:
-            bVely = -bVely
-        if (px - bRad <= bx <= px + bRad + pWidth
-            and py - bRad <= by <= py + bRad + pHeight):
-            bVely = -bVely
-            score += 1
-            #increases speed every time the ball hits the platform
-            if bVely > 0:
-                bVelx += 1
-                bVely += 1
-            else:
-                bVelx -= 1
-                bVely -= 1
+            #draws ball
+            pygame.draw.circle(screen, (0,255,0), (bx, by), bRad)
+            pygame.display.update()
+
+            #draw obstacles
+            def obstacles(x, y, bVely):
+                pygame.draw.rect(screen, (255,0,0), (x, y, 20, 20))
+                pygame.display.update()
+
+                if (x - bRad <= bx <= x + bRad + 20
+                    and y - bRad <= by <= y + bRad + 20):
+                    bVely = -bVely
+                    
+                return bVely
                 
-        #reduces lives if the ball hits the bottom border
-        #ends run if lives == 0. 
-        if by + bRad >= 700:
-            lives -= 1
-            if lives == 0:
-                gameOver = font.render("Game Over", True, (255,255,255))
-                screen.blit(gameOver, (200, 350))
-                finalScore = font.render("Your Score Was {0}".format(score), True, (255, 255, 255))
-                screen.blit(finalScore, (175, 400))
-                #determines whether current score is the high score
-                scoring = open("scoring.txt", "r")
-                highscore = scoring.read()
-                scoring.close()
-                if int(highscore) < score:
-                    highscore = score
-                    scoring = open("scoring.txt", "w")
-                    scoring.write(str(highscore))
+            #creates 5 obstacles
+            bVely = obstacles(100, 100, bVely)
+            bVely = obstacles(170, 100, bVely)
+            bVely = obstacles(240, 100, bVely)
+            bVely = obstacles(310, 100, bVely)
+            bVely = obstacles(380, 100, bVely)
+
+            #bounce off edges and platform
+            if bx - bRad <= 0 or bx + bRad >= 500:
+                bVelx = -bVelx  
+            if by - bRad <= 0 or by + bRad >= 700:
+                bVely = -bVely
+            if (px - bRad <= bx <= px + bRad + pWidth
+                and py - bRad <= by <= py + bRad + pHeight):
+                bVely = -bVely
+                score += 1
+                #increases speed every time the ball hits the platform
+                if bVely > 0:
+                    bVelx += 1
+                    bVely += 1
+                else:
+                    bVelx -= 1
+                    bVely -= 1
+                    
+            #reduces lives if the ball hits the bottom border
+            #ends run if lives == 0. 
+            if by + bRad >= 700:
+                lives -= 1
+                if lives == 0:
+                    gameOver = font.render("Game Over", True, (255,255,255))
+                    screen.blit(gameOver, (200, 350))
+                    finalScore = font.render("Your Score Was {0}".format(score), True, (255, 255, 255))
+                    screen.blit(finalScore, (175, 400))
+                    
+                    #determines whether current score is the high score
+                    scoring = open("scoring.txt", "r")
+                    highscore = scoring.read()
                     scoring.close()
-                    newHighScore = font.render("You got a new high score!", True, (255, 255, 255))
-                    screen.blit((newHighScore), (130, 450))
+                    
+                    if int(highscore) < score:
+                        highscore = score
+                        scoring = open("scoring.txt", "w")
+                        scoring.write(str(highscore))
+                        scoring.close()
+                        newHighScore = font.render("You got a new high score!", True, (255, 255, 255))
+                        screen.blit((newHighScore), (130, 450))
+                        pygame.display.flip()
+                        pygame.display.update()
+                        
+                    highScore = font.render("The High Score is: {0}".format(score), True, (255, 255, 255))
+                    screen.blit(highScore, (160, 500))
                     pygame.display.flip()
                     pygame.display.update()
-                highScore = font.render("The High Score is: {0}".format(score), True, (255, 255, 255))
-                screen.blit(highScore, (160, 500))
-                pygame.display.flip()
-                pygame.display.update()
-                time.sleep(5)
-                
-                run = False
-            
-        #displays score
-        font = pygame.font.Font("freesansbold.ttf", 20)
-        scoreText = font.render("Score: {0}".format(score) ,True,(255,255,255))
-        screen.blit(scoreText, (50, 50))
-        pygame.display.flip()
-        pygame.display.update()
+                    time.sleep(5)
 
-        #displayes lives
-        life = pygame.font.Font("freesansbold.ttf", 20)
-        lifeText = life.render("Lives: {0}".format(lives) ,True,(255,255,255))
-        screen.blit(lifeText, (375, 50))
-        pygame.display.flip()
-        pygame.display.update()
+                    screen.fill((0,0,0))
+                    
+                    run = False
+                
+            #displays score
+            font = pygame.font.Font("freesansbold.ttf", 20)
+            scoreText = font.render("Score: {0}".format(score) ,True,(255,255,255))
+            screen.blit(scoreText, (50, 50))
+            pygame.display.flip()
+            pygame.display.update()
+
+            #displayes lives
+            life = pygame.font.Font("freesansbold.ttf", 20)
+            lifeText = life.render("Lives: {0}".format(lives) ,True,(255,255,255))
+            screen.blit(lifeText, (375, 50))
+            pygame.display.flip()
+            pygame.display.update()
 
 
 pygame.quit()
