@@ -1,3 +1,13 @@
+# There are two Paddles, which move up and down.
+# Paddles can’t go past Horizontal edges of screen.
+# Ball starts in center heading towards an edge
+# Ball bounce off Paddles and Horizontal screen edges.
+# Ball bounces perfectly: angle of incidence == angle of reflection.
+# Ball speeds up after each bounce.
+# If ball touches either vertical edge. Score is given, ball resets
+
+#-------------------------------------------------------
+
 import pygame
 
 pygame.init()
