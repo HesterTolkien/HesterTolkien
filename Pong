@@ -15,7 +15,23 @@ screen = pygame.display.set_mode((900, 500))
 pygame.display.set_caption("Pong")
 screen.fill((0,0,0))
 
-while 1 == 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
+width = 900
+height = 500
+#dimensions and velocity of the paddles
+pWidth = 20
+pHeight = 80
+pVel = 10
+
+#while 1 == 1:
+    #for event in pygame.event.get():
+        #if event.type == pygame.QUIT:
+            #pygame.quit()
+
+#drawn the two paddles
+pygame.draw.rect(screen, (255,255,255), (0, height/2 - pHeight/2, pWidth, pHeight))
+pygame.display.update()
+pygame.draw.rect(screen, (255,255,255), (width - pWidth, height/2 - pHeight/2, pWidth, pHeight))
+pygame.display.update()
+
+
+
