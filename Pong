@@ -43,6 +43,13 @@ player1.paddle()
 player2 = Player(width - pWidth, height/2 - pHeight/2, pWidth, pHeight)
 player2.paddle()
 
+def font(size, Text, x, y):
+    font = pygame.font.Font("freesansbold.tff", size)
+    text = font.render(Text, True, (255,255,255))
+    screen.blit(text, (x, y))
+    pygame.displat.flip()
+    pygame.display.update()
+
 
 
 
