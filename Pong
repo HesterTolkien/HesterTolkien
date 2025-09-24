@@ -21,12 +21,20 @@ height = 500
 pWidth = 20
 pHeight = 80
 pVel = 10
-
+py =  pHeight/2
 score = 0
 
-    #keys = pygame.key.get_pressed()
-    #if keys[pygame.K_UP] and player2.top > 0:
+def end():
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
 
+def font(size, Text, x, y):
+    font = pygame.font.Font("freesansbold.ttf", size)
+    text = font.render(Text, True, (255,255,255))
+    screen.blit(text, (x, y))
+    pygame.display.flip()
+    pygame.display.update()
 
 class Player:
     def __init__(self, px, py, pWidth, pHeight):
@@ -44,12 +52,19 @@ player1.paddle()
 player2 = Player(width - pWidth, height/2 - pHeight/2, pWidth, pHeight)
 player2.paddle()
 
-def font(size, Text, x, y):
-    font = pygame.font.Font("freesansbold.ttf", size)
-    text = font.render(Text, True, (255,255,255))
-    screen.blit(text, (x, y))
-    pygame.display.flip()
-    pygame.display.update()
+while 1 == 1:
+    keys = pygame.key.get_pressed()
+    end()
+    if keys[pygame.K_UP] and py > 0:
+        py += pVel
+    if keys[pygame.K_DOWN] and py < height - pHeight:
+        py -= pVel
+        
+
 
 score = font(20, "Score: {0}".format(score), 400, 20)
 
+#if keys[pygame.K_UP] and player2.self.py > 0:
+#        player2.self.py += pVel
+#    if keys[pygame.K_DOWN] and player2.self.py < height - pHeight:
+#        player2.self.py -= pVel
