@@ -49,24 +49,40 @@ class Player:
         self.py = py
         self.pWidth = pWidth
         self.pHeight = pHeight
-
+        
     def paddle(self):
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
         pygame.display.update()
 
     def movement(self, pVel):
-        keys = pygame.key.get_pressed()
-        end()
-        if keys[pygame.K_UP] and self.py > 0:
-            self.py += pVel
-        if keys[pygame.K_DOWN] and self.py < self.height - self.pHeight:
-            self.py -= pVel
+        if self.py < 0:
+            self.py = 0
+        elif self.py > height-self.py:
+            self.py = height-self.py
+        
             
-def main():       
+def main():
+    keys = pygame.key.get_pressed()
+    
     player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight)
-    player1.paddle()
     player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight)
+    
+    if keys[pygame.K_w]:
+        pVel = -1
+        player1.movement(pVel)
+    elif keys[pygame.K_s]:
+        pVel = 1
+        player1.movement(pVel)
+    player1.paddle()
+        
+    if keys[pygame.K_UP]:
+        pVel = -1
+        player2.movement(pVel)
+    elif keys[pygame.K_DOWN]:
+        pVel = 1
+        player2.movement(pVel)
     player2.paddle()
+
 
 main()
 
