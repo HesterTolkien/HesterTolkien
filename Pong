@@ -15,9 +15,11 @@ screen = pygame.display.set_mode((900, 500))
 pygame.display.set_caption("Pong")
 screen.fill((0,0,0))
 
+#dimensions of screen
 width = 900
 height = 500
-#dimensions and velocity of the paddles
+
+#characteristics of the paddles
 pWidth = 20
 pHeight = 80
 pVel = 10
@@ -28,11 +30,15 @@ pygame.draw.line(screen, (255,255,255), (width/2, 50), (width/2, 450), width=3)
 p1score = 0
 p2score = 0
 
+game = True
+
+#function to quit the window
 def end():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
 
+#function to write text
 def font(size, Text, x, y):
     font = pygame.font.Font("freesansbold.ttf", size)
     text = font.render(Text, True, (255,255,255))
@@ -40,20 +46,24 @@ def font(size, Text, x, y):
     pygame.display.flip()
     pygame.display.update()
 
+#initialising the two scores
 p1score = font(20, "Score: {0}".format(p1score), 20, 20)
 p2score = font(20, "Score: {0}".format(p2score), width-95, 20)
 
+#class for each player
 class Player:
     def __init__(self, px, py, pWidth, pHeight):
         self.px = px
         self.py = py
         self.pWidth = pWidth
         self.pHeight = pHeight
-        
+
+    #function for the paddles      
     def paddle(self):
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
         pygame.display.update()
 
+    #attempt to get movement working
     def movement(self, pVel):
         if self.py < 0:
             self.py = 0
@@ -62,11 +72,26 @@ class Player:
         
             
 def main():
-    keys = pygame.key.get_pressed()
-    
-    player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight)
-    player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight)
-    
+    while game == True:
+        keys = pygame.key.get_pressed()
+
+        #drawing the two separate paddles
+        player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight)
+        player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight)
+
+        if keys[pygame.K_w]:
+            player1.py -= 1
+        elif keys[pygame.K_s]:
+            player1.py += 1
+        player1.paddle()
+
+        if keys[pygame.K_UP]:
+            player2.py -= 1
+        elif keys[pygame.K_DOWN]:
+            player2.py += 1
+        player2.paddle()
+
+"""    
     if keys[pygame.K_w]:
         pVel = -1
         player1.movement(pVel)
@@ -82,7 +107,8 @@ def main():
         pVel = 1
         player2.movement(pVel)
     player2.paddle()
-
+"""
 
 main()
+
 
