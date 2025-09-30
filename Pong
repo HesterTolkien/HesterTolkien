@@ -72,22 +72,23 @@ class Player:
         
             
 def main():
+    #drawing the two separate paddles
+    player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight)
+    player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight)
+        
     while game == True:
+        end()
         keys = pygame.key.get_pressed()
 
-        #drawing the two separate paddles
-        player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight)
-        player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight)
-
-        if keys[pygame.K_w]:
+        if keys[pygame.K_w] == True:
             player1.py -= 1
-        elif keys[pygame.K_s]:
+        elif keys[pygame.K_s] == True:
             player1.py += 1
         player1.paddle()
 
-        if keys[pygame.K_UP]:
+        if keys[pygame.K_UP] == True:
             player2.py -= 1
-        elif keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN] == True:
             player2.py += 1
         player2.paddle()
 
