@@ -80,15 +80,15 @@ def main():
         end()
         keys = pygame.key.get_pressed()
 
-        if keys[pygame.K_w] == True:
+        if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
-        elif keys[pygame.K_s] == True:
+        elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
         player1.paddle()
 
-        if keys[pygame.K_UP] == True:
+        if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
-        elif keys[pygame.K_DOWN] == True:
+        elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
         player2.paddle()
 
