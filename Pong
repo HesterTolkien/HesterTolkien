@@ -82,36 +82,16 @@ def main():
 
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
+            player1.paddle()
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
-        screen.fill((0,0,0))
-        player1.paddle()
+            player1.paddle()
 
         if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
+            player2.paddle()
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
-        screen.fill((0,0,0))
-        player2.paddle()
-
-"""    
-    if keys[pygame.K_w]:
-        pVel = -1
-        player1.movement(pVel)
-    elif keys[pygame.K_s]:
-        pVel = 1
-        player1.movement(pVel)
-    player1.paddle()
-        
-    if keys[pygame.K_UP]:
-        pVel = -1
-        player2.movement(pVel)
-    elif keys[pygame.K_DOWN]:
-        pVel = 1
-        player2.movement(pVel)
-    player2.paddle()
-"""
-
-main()
+            player2.paddle()
 
 
