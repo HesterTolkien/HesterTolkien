@@ -48,50 +48,51 @@ def font(size, Text, x, y):
 
 #initialising the two scores
 p1score = font(20, "Score: {0}".format(p1score), 20, 20)
-p2score = font(20, "Score: {0}".format(p2score), width-95, 20)
+p2score = font(20, "Score: {0}".format(p2score), width-95, 20)  
 
 #class for each player
 class Player:
-    def __init__(self, px, py, pWidth, pHeight):
+    def __init__(self, px, py, pWidth, pHeight, pVel):
         self.px = px
         self.py = py
         self.pWidth = pWidth
         self.pHeight = pHeight
+        self.pVel = pVel
 
     #function for the paddles      
     def paddle(self):
+        screen.fill((0,0,0))
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
         pygame.display.update()
-
-    #attempt to get movement working
-    def movement(self, pVel):
-        if self.py < 0:
-            self.py = 0
-        elif self.py > height-self.py:
-            self.py = height-self.py
         
             
 def main():
     #drawing the two separate paddles
     player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
     player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
-        
+  
     while game == True:
         end()
         keys = pygame.key.get_pressed()
 
+
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
+            player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
             player1.paddle()
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
+            player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
             player1.paddle()
 
         if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
+            player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
             player2.paddle()
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
+            player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
             player2.paddle()
 
 
+main()
