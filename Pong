@@ -25,6 +25,7 @@ pHeight = 80
 pVel = 10
 py =  pHeight/2
 
+#draw centre line
 pygame.draw.line(screen, (255,255,255), (width/2, 50), (width/2, 450), width=3)
 
 p1score = 0
@@ -75,24 +76,22 @@ def main():
         end()
         keys = pygame.key.get_pressed()
 
-
+        #movements of the paddles separately
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
-            player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
-            player1.paddle()
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
-            player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
-            player1.paddle()
+            
+        player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
+        player1.paddle()
 
         if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
-            player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
-            player2.paddle()
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
-            player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
-            player2.paddle()
+            
+        player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
+        player2.paddle()
 
 
 main()
