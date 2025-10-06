@@ -25,9 +25,6 @@ pHeight = 80
 pVel = 10
 py =  pHeight/2
 
-#draw centre line
-pygame.draw.line(screen, (255,255,255), (width/2, 50), (width/2, 450), width=3)
-
 p1score = 0
 p2score = 0
 
@@ -47,9 +44,14 @@ def font(size, Text, x, y):
     pygame.display.flip()
     pygame.display.update()
 
-#initialising the two scores
-p1score = font(20, "Score: {0}".format(p1score), 20, 20)
-p2score = font(20, "Score: {0}".format(p2score), width-95, 20)  
+def setup(p1score, p2score, width):
+    #draw centre line
+    pygame.draw.line(screen, (255,255,255), (width/2, 50), (width/2, 450), width=3)
+    #initialising the two scores
+    p1score = font(20, "Score: {0}".format(p1score), 20, 20)
+    p2score = font(20, "Score: {0}".format(p2score), width-95, 20)
+
+    
 
 #class for each player
 class Player:
@@ -75,23 +77,20 @@ def main():
     while game == True:
         end()
         keys = pygame.key.get_pressed()
-
+        
         #movements of the paddles separately
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
-            
-        player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
         player1.paddle()
-
+        setup(p1score, p2score, width)
+  
         if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
-            
-        player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
         player2.paddle()
-
-
-main()
+        setup(p1score, p2score, width)
+     
+mmain()
