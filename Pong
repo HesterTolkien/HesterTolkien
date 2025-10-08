@@ -15,6 +15,7 @@ screen = pygame.display.set_mode((900, 500))
 pygame.display.set_caption("Pong")
 screen.fill((0,0,0))
 
+
 #dimensions of screen
 width = 900
 height = 500
@@ -41,8 +42,8 @@ def font(size, Text, x, y):
     font = pygame.font.Font("freesansbold.ttf", size)
     text = font.render(Text, True, (255,255,255))
     screen.blit(text, (x, y))
-    pygame.display.flip()
-    pygame.display.update()
+    #pygame.display.flip()
+    #pygame.display.update()
 
 def setup(p1score, p2score, width):
     #draw centre line
@@ -66,7 +67,6 @@ class Player:
     def paddle(self):
         screen.fill((0,0,0))
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
-        pygame.display.update()
         
             
 def main():
@@ -81,16 +81,19 @@ def main():
         #movements of the paddles separately
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
+            player1.paddle()
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
-        player1.paddle()
-        setup(p1score, p2score, width)
-  
-        if keys[pygame.K_UP] == True and player2.py > player2.pVel:
+            player1.paddle()
+        elif keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
+            player2.paddle()
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
-        player2.paddle()
+            player2.paddle()
+            
         setup(p1score, p2score, width)
+
+        pygame.display.update()
      
-mmain()
+main()
