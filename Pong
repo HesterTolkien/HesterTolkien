@@ -70,6 +70,12 @@ class Player:
         
             
 def main():
+    #ball constants
+    bx = width/2
+    by = height/2
+    bRad = 15
+    bVelx = 5
+    bVely = 5
     #drawing the two separate paddles
     player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
     player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
@@ -85,15 +91,19 @@ def main():
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
             player1.paddle()
-        elif keys[pygame.K_UP] == True and player2.py > player2.pVel:
+            
+        if keys[pygame.K_UP] == True and player2.py > player2.pVel:
             player2.py -= 1
             player2.paddle()
         elif keys[pygame.K_DOWN] == True and player2.py < height - player2.pVel - player2.pHeight:
             player2.py += 1
             player2.paddle()
+        
+        bx += bVelx
+        by += bVely
+        pygame.draw.circle(screen, (255,255,255), (bx, by), bRad)
             
         setup(p1score, p2score, width)
-
         pygame.display.update()
      
 main()
