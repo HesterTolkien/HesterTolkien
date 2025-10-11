@@ -29,7 +29,15 @@ py =  pHeight/2
 p1score = 0
 p2score = 0
 
+#ball constants
+bx = width/2
+by = height/2
+bRad = 15
+bVelx = 5
+bVely = 5
+    
 game = True
+
 
 #function to quit the window
 def end():
@@ -52,7 +60,11 @@ def setup(p1score, p2score, width):
     p1score = font(20, "Score: {0}".format(p1score), 20, 20)
     p2score = font(20, "Score: {0}".format(p2score), width-95, 20)
 
-    
+def ball(bx, by, bVelx, bVely, bRad):
+    bx += bVelx
+    by += bVely
+    pygame.draw.circle(screen, (255,255,255), (bx, by), bRad)
+    pygame.display.update()
 
 #class for each player
 class Player:
@@ -65,17 +77,11 @@ class Player:
 
     #function for the paddles      
     def paddle(self):
-        screen.fill((0,0,0))
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
         
             
 def main():
-    #ball constants
-    bx = width/2
-    by = height/2
-    bRad = 15
-    bVelx = 5
-    bVely = 5
+   
     #drawing the two separate paddles
     player1 = Player(10, height/2 - pHeight/2, pWidth, pHeight, pVel)
     player2 = Player(width - pWidth - 10, height/2 - pHeight/2, pWidth, pHeight, pVel)
@@ -99,10 +105,9 @@ def main():
             player2.py += 1
             player2.paddle()
         
-        bx += bVelx
-        by += bVely
-        pygame.draw.circle(screen, (255,255,255), (bx, by), bRad)
-            
+        ball(bx, by, bVelx, bVely, bRad)
+
+        screen.fill((0,0,0))
         setup(p1score, p2score, width)
         pygame.display.update()
      
