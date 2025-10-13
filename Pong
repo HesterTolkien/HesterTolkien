@@ -117,3 +117,19 @@ def main():
         pygame.display.update()
      
 main()
+
+""
+if bx - bRad <= 0:
+        #p2score + 1
+    elif bx + bRad >= width:
+        #p1Score + 1
+        
+    if by - bRad <= 0 or by + bRad >= height:
+        bVely = -bVely
+    if (
+    
+
+
+"""
+
+
