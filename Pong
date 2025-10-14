@@ -26,8 +26,8 @@ pHeight = 80
 pVel = 10
 py =  pHeight/2
 
-p1score = 0
-p2score = 0
+p1Score = 0
+p2Score = 0
 
 
 game = True
@@ -76,14 +76,14 @@ class Player:
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
         
             
-def main():
+def main(p1Score, p2Score):
 
     #ball constants
     bx = width/2
     by = height/2
     bRad = 15
-    bVelx = 5
-    bVely = 5
+    bVelx = 2
+    bVely = 2
     
    
     #drawing the two separate paddles
@@ -112,22 +112,25 @@ def main():
 
         bx, by = ball(bx, by, bVelx, bVely, bRad)
 
-        screen.fill((0,0,0))
-        setup(p1score, p2score, width)
-        pygame.display.update()
-     
-main()
 
-""
-if bx - bRad <= 0:
-        #p2score + 1
-    elif bx + bRad >= width:
-        #p1Score + 1
-        
-    if by - bRad <= 0 or by + bRad >= height:
-        bVely = -bVely
-    if (
+        if bx - bRad <= 0:
+            p2score + 1
+        elif bx + bRad >= width:
+            p1Score + 1
+            
+        if by - bRad <= 0 or by + bRad >= height:
+            bVely = -bVely
+
+            
+        screen.fill((0,0,0))
+        setup(p1Score, p2Score, width)
+        pygame.display.update()
+
+       
     
+     
+main(p1Score, p2Score)
+
 
 
 """
