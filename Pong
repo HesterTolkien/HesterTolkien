@@ -117,9 +117,15 @@ def main(p1Score, p2Score):
             p2score + 1
         elif bx + bRad >= width:
             p1Score + 1
+
+        if (bx - bRad == 20) and ( by - bRad == py):
+            bVely = -bVely
+        elif (bx + bRad == 880) and ( by + bRad == py):
+            bVely = -bVely
             
         if by - bRad <= 0 or by + bRad >= height:
             bVely = -bVely
+
 
             
         screen.fill((0,0,0))
