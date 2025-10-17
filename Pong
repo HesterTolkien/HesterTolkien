@@ -74,6 +74,7 @@ class Player:
     #function for the paddles      
     def paddle(self):
         pygame.draw.rect(screen, (255,255,255), (self.px, self.py, self.pWidth, self.pHeight))
+        pygame.display.update()
         
             
 def main(p1Score, p2Score):
@@ -98,6 +99,7 @@ def main(p1Score, p2Score):
         if keys[pygame.K_w] == True and player1.py > player1.pVel:
             player1.py -= 1
             player1.paddle()
+            
         elif keys[pygame.K_s] == True and player1.py < height - player1.pVel - player1.pHeight:
             player1.py += 1
             player1.paddle()
@@ -125,7 +127,6 @@ def main(p1Score, p2Score):
             
         if by - bRad <= 0 or by + bRad >= height:
             bVely = -bVely
-
 
             
         screen.fill((0,0,0))
