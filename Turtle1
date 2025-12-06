@@ -1,0 +1,15 @@
+from turtle import *
+from colorsys import *
+
+tracer(50)
+bgcolor("black")
+pensize(2)
+
+for i in range(15):
+    for j in range(200):
+        color(hsv_to_rgb(j/ 200,1,1))
+        forward(j*1.2)
+        backward(j*1.2)
+        left(89)
+    left(24)
+done()
