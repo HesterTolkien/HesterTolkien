@@ -1,0 +1,17 @@
+from turtle import *
+
+count = 1
+bgcolor("black")
+tracer(5)
+
+while count < 250:
+    forward(count)
+    color("yellow")
+    left(144)
+    count += 1
+    forward(count)
+    color("greenyellow")
+    right(350)
+    color("orange")
+    right(30)
+done()
