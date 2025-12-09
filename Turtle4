@@ -1,0 +1,14 @@
+from turtle import *
+from colorsys import *
+import random
+
+bgcolor("black")
+tracer(5)
+pensize(2)
+
+for i in range(500):
+    r,g,b = random.randint(0,255), random.randint(0,255), random.randint(0,255)
+    color(hsv_to_rgb(r,g,b))
+    forward(i+50)
+    right(91)
+done()
